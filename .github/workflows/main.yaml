@@ -24,21 +24,20 @@ jobs:
       # 拉取txt
       - name: curl
         run: |
-          curl -OL https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/apple.txt \
-            https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/applications.txt \
-            https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/cncidr.txt \
-            https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/direct.txt \
-            https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/gfw.txt \
-            https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/google.txt \
-            https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/greatfire.txt \
-            https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/icloud.txt \
-            https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/lancidr.txt \
-            https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/private.txt \
-            https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/proxy.txt \
-            https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/reject.txt \
-            https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/telegramcidr.txt \
-            https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/tld-not-cn.txt \
-
+          curl -OL https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/apple.txt
+          curl -OL https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/applications.txt
+          curl -OL https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/cncidr.txt
+          curl -OL https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/direct.txt
+          curl -OL https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/gfw.txt
+          curl -OL https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/google.txt
+          curl -OL https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/greatfire.txt
+          curl -OL https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/icloud.txt
+          curl -OL https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/lancidr.txt
+          curl -OL https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/private.txt
+          curl -OL https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/proxy.txt
+          curl -OL https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/reject.txt
+          curl -OL https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/telegramcidr.txt
+          curl -OL https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/tld-not-cn.txt
       - name: pip & run
         run: |
           pip install pyyaml
