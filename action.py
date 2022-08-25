@@ -8,8 +8,8 @@ except ImportError:
     from yaml import Loader, Dumper
 
 cdir = os.path.dirname(__file__)
-files = set(glob.glob(os.path.join(cdir, '*.txt'))) - set(glob.glob(os.path.join(cdir,
-                                                                                 '*-txt.txt')))
+files = set(glob.glob(os.path.join(cdir, '*.txt'))) - set(
+    glob.glob(os.path.join(cdir, '*-text.txt')))
 for file in files:
     print(file)
     basename = os.path.basename(file)
