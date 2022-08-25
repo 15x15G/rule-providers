@@ -1,0 +1,60 @@
+name: main
+
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  workflow_dispatch:
+  repository_dispatch:
+  schedule:
+    - cron: "0 23 * * *" # at 23:00 per day
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    env:
+      TZ: Asia/Shanghai
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: Python 3.9
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.9
+
+      # 拉取txt
+      - name: curl
+        run: |
+          curl -OL https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/apple.txt \
+            https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/applications.txt \
+            https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/cncidr.txt \
+            https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/direct.txt \
+            https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/gfw.txt \
+            https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/google.txt \
+            https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/greatfire.txt \
+            https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/icloud.txt \
+            https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/lancidr.txt \
+            https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/private.txt \
+            https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/proxy.txt \
+            https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/reject.txt \
+            https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/telegramcidr.txt \
+            https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/tld-not-cn.txt \
+
+      - name: pip & run
+        run: |
+          pip install pyyaml
+          python action.py
+
+      # 配置 git，避免一些莫名其妙的错误
+      - name: Git Configuration
+        run: |
+          git config --global core.quotePath false
+          git config --global core.autocrlf false
+          git config --global core.safecrlf true
+          git config --global core.ignorecase false
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Commit and push if changed
+        run: |
+          git add -A
+          git diff-index --quiet HEAD && echo "no update" || (echo "update!" && git commit -m "Auto Updated: `date +'%Y-%m-%d %H:%M:%S'`" && git push origin main)
